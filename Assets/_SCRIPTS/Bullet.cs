@@ -192,7 +192,6 @@ public class Bullet : MonoBehaviour {
 	void hitEff(){
 		if (trail!=null){
 			trail.transform.parent = null;
-			trail.emissionRate = 0;
 			trail.GetComponent<trailCleanup>().StartCleanup();
 		}
 

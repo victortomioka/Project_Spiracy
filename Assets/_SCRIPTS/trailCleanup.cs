@@ -8,8 +8,9 @@ public class trailCleanup : MonoBehaviour {
 	
 	public void StartCleanup () {
 		thisPart = this.GetComponent<ParticleSystem>();
+		var em = thisPart.emission;
+		em.enabled=false;
 		StartCoroutine(Cleanup());
-		thisPart.enableEmission = false;
 		pool = GameObject.Find("trailsPool");
 		if(pool!=null){
 			transform.parent = pool.transform;
