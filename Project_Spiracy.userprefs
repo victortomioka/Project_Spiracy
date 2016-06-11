@@ -1,8 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_SCRIPTS\trailCleanup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_SCRIPTS\MenuController.cs">
     <Files>
-      <File FileName="Assets\_SCRIPTS\trailCleanup.cs" Line="12" Column="20" />
+      <File FileName="Assets\_SCRIPTS\SplashScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\_SCRIPTS\trailCleanup.cs" Line="1" Column="1" />
+      <File FileName="Assets\_SCRIPTS\MenuController.cs" Line="265" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
