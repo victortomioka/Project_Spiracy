@@ -28,6 +28,7 @@ public class ShipController : MonoBehaviour {
 	
 	void Start () 
 	{
+		if(PlayerData.ship==null || PlayerData.primary== null || PlayerData.secondary==null){SceneManager.LoadScene("02_hangar");}
 		if(cheating){Globals.cheatMode=true;}
 		currSpecial = specialCount;
 		pauseimg = Resources.Load("pause") as Texture;

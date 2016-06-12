@@ -153,23 +153,12 @@ public class EnemyAI : MonoBehaviour
 
 	void spawnPickup()
 	{
-//		float pickupChance = Random.Range(0,100);
-//		if(pickupChance<8){
-//			int pickupItem = Random.Range(0,3);
-//			switch(pickupItem){
-//			case 0: 
-// 				Instantiate (Pickups[0],transform.position,Quaternion.identity);
-//				break;
-//			case 1: 
-//				Instantiate (Pickups[1],transform.position,Quaternion.identity);
-//				break;
-//			case 2: 
-//				Instantiate (Pickups[2],transform.position,Quaternion.identity);
-//				break;
-//			}
-//		}
-//
-//		disableFSM();
+		float pickupChance = Random.Range(0,100);
+		if(pickupChance<50){
+			int pickupItem = Random.Range(0,Pickups.Length);
+			Instantiate (Pickups[pickupItem],transform.position,transform.rotation);
+			}
+		disableFSM();
 	}
 
 	void shoot(float spr, Rigidbody[] bul, Transform[] muz, int cnt, bool stag, bool scat)

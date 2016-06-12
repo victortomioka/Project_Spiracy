@@ -4,50 +4,50 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour {
-		
-		public enum ammo{
-			bullet,shell,energy,explo
-		}
-		
-		public ammo ammoType;
 
-		[HideInInspector]
-		public int maxAmmo;
+	public enum ammo{
+		bullet,shell,energy,explo
+	}
 
-		[HideInInspector]
-		public static int[] currAmmo = new int[4];
-		[HideInInspector]
-		public int currAmmoIndex;
+	public ammo ammoType;
 
-		public int ammoConsumption = 1;
+	[HideInInspector]
+	public int maxAmmo;
 
-		public string longName;
-		public Text toolTip;
+	[HideInInspector]
+	public static int[] currAmmo = new int[4];
+	[HideInInspector]
+	public int currAmmoIndex;
 
-		public Rigidbody bullet;
-		public float spreadBase = 15;
-		public float weaponCoolDown = 0.1f;
-		public int shotCount = 1;
+	public int ammoConsumption = 1;
 
-		public Transform[] muzzleCount;
+	public string longName;
+	public Text toolTip;
 
-		public bool isStaggered;
-		public bool isScattered;
+	public Rigidbody bullet;
+	public float spreadBase = 15;
+	public float weaponCoolDown = 0.1f;
+	public int shotCount = 1;
 
-		[HideInInspector]
-		public bool canShoot;
-		[HideInInspector]
-		public float spreadFactor;
-		[HideInInspector]
-		public float spreadIncrease;
-		[HideInInspector]	
-		public float spreadMax;
-		[HideInInspector]
-		public float cooldown;
-		
-		private int staggerCount = 0;
-		public AudioClip muzzleSound;
-		public Animator anim;
+	public Transform[] muzzleCount;
+
+	public bool isStaggered;
+	public bool isScattered;
+
+	[HideInInspector]
+	public bool canShoot;
+	[HideInInspector]
+	public float spreadFactor;
+	[HideInInspector]
+	public float spreadIncrease;
+	[HideInInspector]	
+	public float spreadMax;
+	[HideInInspector]
+	public float cooldown;
+
+	private int staggerCount = 0;
+	public AudioClip muzzleSound;
+	public Animator anim;
 
 	void Awake(){
 		switch(ammoType){
@@ -56,13 +56,13 @@ public class Weapon : MonoBehaviour {
 		case ammo.explo:maxAmmo = 250;currAmmoIndex = 2;break;
 		case ammo.energy:maxAmmo = 250;currAmmoIndex = 3;break;
 		}
-		
+
 		currAmmo[currAmmoIndex] = maxAmmo;
 	}
 
 	void Start(){
 		anim = GetComponent<Animator>();
-	
+
 	}
 
 	public void shoot(Weapon wep, Transform[] muz){
@@ -73,10 +73,10 @@ public class Weapon : MonoBehaviour {
 			spreadFactor += spreadIncrease;
 
 			if(!Globals.cheatMode){
-			currAmmo[currAmmoIndex]-=ammoConsumption;
+				currAmmo[currAmmoIndex]-=ammoConsumption;
 			}
 
-				if(!isStaggered){
+			if(!isStaggered){
 				for(int j = 0; j<muz.Length; j++){
 					if(isScattered)
 					{
@@ -89,13 +89,13 @@ public class Weapon : MonoBehaviour {
 					if(!isScattered){
 						Rigidbody newBullet = Instantiate (wep.bullet, muz[j].position, muz[j].rotation) as Rigidbody;
 						newBullet.transform.Rotate (Utility.calcSpread(spreadFactor));
+					}
 				}
 			}
-		}
-				if(isStaggered){
-					staggerCount++;
-					if (staggerCount>=muzzleCount.Length){
-						staggerCount = 0;
+			if(isStaggered){
+				staggerCount++;
+				if (staggerCount>=muzzleCount.Length){
+					staggerCount = 0;
 				}
 
 				if(isScattered)
@@ -112,7 +112,7 @@ public class Weapon : MonoBehaviour {
 					newBullet.transform.Rotate (Utility.calcSpread (spreadFactor));
 				}
 			}
+		}
 	}
-}
 
 }

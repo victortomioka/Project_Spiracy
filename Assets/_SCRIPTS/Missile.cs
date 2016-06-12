@@ -90,10 +90,12 @@ public class Missile : MonoBehaviour {
 	}
 
 	public void OnTriggerExit(Collider tgt){
+		if (collisionMask == (collisionMask | (1 << tgt.gameObject.layer))){
 			target = null;
 			hasFoundTarget = false;
 			doNotSeek = true;
 			DontSeekTimer = 2;
+		}
 	}
 
 	// enemy detected
@@ -101,8 +103,8 @@ public class Missile : MonoBehaviour {
 			Quaternion targetRot;
 			targetRot = Quaternion.LookRotation (t.position - transform.position);
 			transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRot, tRateFinal * Time.deltaTime);
-			transform.Translate (transform.forward * speed * Time.deltaTime);
-
+			
+		transform.Translate (transform.forward * speed * Time.deltaTime);
 			float dist = Vector3.Distance(transform.position, t.position);
 
 				if (dist < detRange) {

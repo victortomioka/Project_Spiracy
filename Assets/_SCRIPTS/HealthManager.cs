@@ -122,7 +122,7 @@ public class HealthManager : MonoBehaviour, IDamageable {
 			Utility.spawnEffect(deathEffect,transform.position,transform.rotation);
 			}
 			dead = true;
-			GameObject.Destroy(gameObject);
+			GameObject.Destroy(gameObject,0.2f);
 		}
 	}
 
