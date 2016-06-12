@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(UIManager))]
 public class ShipController : MonoBehaviour {
 
+	public string longName;
 	public float movementSpeed = 1.0f;
 	public int invert = -1;
 	public Transform shipModel;

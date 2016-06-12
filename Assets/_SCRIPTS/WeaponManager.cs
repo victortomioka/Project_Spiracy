@@ -12,17 +12,9 @@ public class WeaponManager : MonoBehaviour {
 	Transform mount1;
 	Transform mount2;
 
-	[Tooltip("Insert primary Weapon objects here")]
-	public Weapon[] PrimaryWeapon;
-	[Tooltip("Insert secondary Weapon objects here")]
-	public Weapon[] SecondaryWeapon;
-
 	private Transform[] muzzleManager1;
 	private Transform[] muzzleManager2;
-	
-	public int weaponPrimaryNum = 0;
-	public int weaponSecondaryNum = 0;
-	
+
 	private Transform weaponPrimaryTrans;
 	private Transform weaponSecondaryTrans;
 
@@ -52,17 +44,19 @@ public class WeaponManager : MonoBehaviour {
 
 	void Start() {
 
-		PrimaryWeapon[weaponPrimaryNum].cooldown = 0;
-		PrimaryWeapon[weaponPrimaryNum].canShoot = true;
-		SecondaryWeapon[weaponSecondaryNum].cooldown = 0;
-		SecondaryWeapon[weaponSecondaryNum].canShoot = true;
+		PlayerData.primary.cooldown = 0;
+		PlayerData.primary.canShoot = true;
+		PlayerData.secondary.cooldown = 0;
+		PlayerData.secondary.canShoot = true;
+		PlayerData.primary.spreadFactor = PlayerData.primary.spreadBase;
+		PlayerData.secondary.spreadFactor = PlayerData.secondary.spreadBase;
+
 		mount1 = transform.Find ("weaponMount1");
 		mount2 = transform.Find ("weaponMount2");
 		equipWeapon();
 		source = gameObject.GetComponent<AudioSource>();
 
-		PrimaryWeapon[weaponPrimaryNum].spreadFactor = PrimaryWeapon[weaponPrimaryNum].spreadBase;
-		SecondaryWeapon[weaponSecondaryNum].spreadFactor = SecondaryWeapon[weaponSecondaryNum].spreadBase;
+
 	}
 
 	#endregion
@@ -87,7 +81,7 @@ public class WeaponManager : MonoBehaviour {
 
 		//primary
 
-		Weapon weaponPrimaryEquipped = Instantiate(PrimaryWeapon[weaponPrimaryNum],mount1.position,transform.rotation) as Weapon;
+		Weapon weaponPrimaryEquipped = Instantiate(PlayerData.primary,mount1.position,transform.rotation) as Weapon;
 		primary = weaponPrimaryEquipped;
 		WPGameObject = weaponPrimaryEquipped.gameObject;
 		weaponPrimaryTrans = WPGameObject.GetComponent<Transform>();
@@ -103,7 +97,7 @@ public class WeaponManager : MonoBehaviour {
 
 		//secondary
 
-		Weapon weaponSecondaryEquipped = Instantiate(SecondaryWeapon[weaponSecondaryNum],mount2.position,transform.rotation) as Weapon;
+		Weapon weaponSecondaryEquipped = Instantiate(PlayerData.secondary,mount2.position,transform.rotation) as Weapon;
 		secondary = weaponSecondaryEquipped;
 		WSGameObject = weaponSecondaryEquipped.gameObject;
 		weaponSecondaryTrans = WSGameObject.GetComponent<Transform>();

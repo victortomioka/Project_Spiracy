@@ -79,7 +79,7 @@ public class MenuController : MonoBehaviour {
 		fadeUIGroup(pressany,false);
 	}
 
-	void goToMain(){
+	public void goToMain(){
 		switch(currentMenu){
 		case menus.options: fadeUIGroup(optionsMenu,true);fadeUIGroup(mainMenu,false);break;
 		case menus.credits: fadeUIGroup(creditScreen,true);fadeUIGroup(mainMenu,false);break;
@@ -194,7 +194,7 @@ public class MenuController : MonoBehaviour {
 
 	IEnumerator waitAndPlay(float t){
 		yield return new WaitForSeconds(t);
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(2);
 	}
 
 	void checkForAnimButton(GameObject tgt, bool reverse){
