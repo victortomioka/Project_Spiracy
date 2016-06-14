@@ -114,6 +114,7 @@ public class EquipMenu : MonoBehaviour {
 		dummy.GetComponent<HealthManager>().enabled = false;
 		dummy.GetComponent<UIManager>().enabled = false;
 		dummy.transform.localScale*=0.5f;
+		dummy.AddComponent<MouseRotate>();
 		mount1 = GameObject.Find("weaponMount1").transform;
 		mount2 = GameObject.Find("weaponMount2").transform;
 

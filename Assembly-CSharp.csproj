@@ -57,6 +57,7 @@
      <Compile Include="Assets\_SCRIPTS\IDamageable.cs" />
      <Compile Include="Assets\_SCRIPTS\Menus\EquipMenu.cs" />
      <Compile Include="Assets\_SCRIPTS\Menus\MenuController.cs" />
+     <Compile Include="Assets\_SCRIPTS\Menus\MouseRotate.cs" />
      <Compile Include="Assets\_SCRIPTS\Menus\SplashScreen.cs" />
      <Compile Include="Assets\_SCRIPTS\Missile.cs" />
      <Compile Include="Assets\_SCRIPTS\Obstacle.cs" />

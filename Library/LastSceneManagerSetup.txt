@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_SCENES/10_plains.unity
+- path: Assets/_SCENES/02_hangar.unity
   isLoaded: 1
   isActive: 1
