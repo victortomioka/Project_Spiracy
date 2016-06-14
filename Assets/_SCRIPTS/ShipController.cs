@@ -20,7 +20,8 @@ public class ShipController : MonoBehaviour {
 	float escapeCd;
 	Scene currentScene;
 	public bool cheating;
-
+	Camera mainCam;
+	AudioLowPassFilter mCamLowpass;
 
 	public event System.Action OnSpecial;
 
@@ -34,6 +35,8 @@ public class ShipController : MonoBehaviour {
 		pauseimg = Resources.Load("pause") as Texture;
 		Time.timeScale=1;
 		currentScene = SceneManager.GetActiveScene();
+		mainCam = Camera.main;
+		mCamLowpass = mainCam.GetComponent<AudioLowPassFilter>();
 	}
 
 	void Update () 
@@ -57,15 +60,15 @@ public class ShipController : MonoBehaviour {
 		if (Input.GetKey("f") && Globals.playerDead){
 			Globals.playerDead=false;
 			Time.timeScale=1;
-			SceneManager.LoadScene(currentScene.buildIndex);
+			SceneManager.LoadScene("02_hangar");
 		}
 
 		if (Input.GetKey("escape")){
 			if(!Globals.playerDead && escapeCd<=0){
 
 			switch(Globals.Pause){
-				case true: Time.timeScale=1; Globals.Pause=false; escapeCd=1; StartCoroutine(pauseCooldown()); break;
-				case false: Time.timeScale=0; Globals.Pause=true; escapeCd=1; StartCoroutine(pauseCooldown()); break;
+				case true: mCamLowpass.cutoffFrequency=22000 ;Time.timeScale=1; Globals.Pause=false; escapeCd=1; StartCoroutine(pauseCooldown()); break;
+				case false: mCamLowpass.cutoffFrequency=1100 ; Time.timeScale=0; Globals.Pause=true; escapeCd=1; StartCoroutine(pauseCooldown()); break;
 				}
 			}
 		}

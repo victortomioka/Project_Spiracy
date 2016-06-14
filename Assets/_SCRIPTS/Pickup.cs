@@ -89,15 +89,14 @@ void Chase (Transform t) {
 
 		int randomInt = Random.Range(0,2);
 		if (randomInt == 0){
-			
 			Weapon wep = GameObject.FindObjectOfType<WeaponManager>().primary;
 			if(Weapon.currAmmo[wep.currAmmoIndex]<wep.maxAmmo){
-				Weapon.currAmmo[wep.currAmmoIndex]+=wep.maxAmmo/10;
+				wep.ammoChange(wep.maxAmmo/10, true);
 		}
 		}else if (randomInt == 1){
 			Weapon wep = GameObject.FindObjectOfType<WeaponManager>().secondary;
 			if(Weapon.currAmmo[wep.currAmmoIndex]<wep.maxAmmo){
-				Weapon.currAmmo[wep.currAmmoIndex]+=wep.maxAmmo/10;
+				wep.ammoChange(wep.maxAmmo/10, true);
 			}
 		}
 		GameObject.Destroy(this.gameObject);

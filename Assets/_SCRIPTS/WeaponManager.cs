@@ -42,21 +42,11 @@ public class WeaponManager : MonoBehaviour {
 
 	#region start
 
-	void Start() {
-
-		PlayerData.primary.cooldown = 0;
-		PlayerData.primary.canShoot = true;
-		PlayerData.secondary.cooldown = 0;
-		PlayerData.secondary.canShoot = true;
-		PlayerData.primary.spreadFactor = PlayerData.primary.spreadBase;
-		PlayerData.secondary.spreadFactor = PlayerData.secondary.spreadBase;
-
+	void Awake() {
 		mount1 = transform.Find ("weaponMount1");
 		mount2 = transform.Find ("weaponMount2");
 		equipWeapon();
 		source = gameObject.GetComponent<AudioSource>();
-
-
 	}
 
 	#endregion
@@ -79,10 +69,18 @@ public class WeaponManager : MonoBehaviour {
 
 	void equipWeapon(){
 
+
+
+
+
+
 		//primary
 
 		Weapon weaponPrimaryEquipped = Instantiate(PlayerData.primary,mount1.position,transform.rotation) as Weapon;
 		primary = weaponPrimaryEquipped;
+		primary.cooldown = 0;
+		primary.canShoot = true;
+		primary.spreadFactor = PlayerData.primary.spreadBase;
 		WPGameObject = weaponPrimaryEquipped.gameObject;
 		weaponPrimaryTrans = WPGameObject.GetComponent<Transform>();
 		primarySound = weaponPrimaryEquipped.muzzleSound;
@@ -99,6 +97,9 @@ public class WeaponManager : MonoBehaviour {
 
 		Weapon weaponSecondaryEquipped = Instantiate(PlayerData.secondary,mount2.position,transform.rotation) as Weapon;
 		secondary = weaponSecondaryEquipped;
+		secondary.cooldown = 0;
+		secondary.canShoot = true;
+		secondary.spreadFactor = PlayerData.secondary.spreadBase;
 		WSGameObject = weaponSecondaryEquipped.gameObject;
 		weaponSecondaryTrans = WSGameObject.GetComponent<Transform>();
 		secondarySound = weaponSecondaryEquipped.muzzleSound;

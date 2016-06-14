@@ -22,38 +22,10 @@ public class UIManager : MonoBehaviour {
 
     void Start()
     {
-        playerObj = FindObjectOfType<ShipController>().gameObject;
-		wepCtrl = playerObj.GetComponent<WeaponManager>();
-
-		playerCtrl = playerObj.GetComponent<ShipController>();
-		playerCtrl.OnSpecial += UpdateSpecial;
-
-		wepCtrl.shotPrimary += primaryCR;
-		wepCtrl.shotSecondary += secondaryCR;
-		wepCtrl.shotPrimary += updateAmmo;
-		wepCtrl.shotSecondary += updateAmmo;
-	
-		playerHealth = playerObj.GetComponent<HealthManager>();
-        playerHealth.OnDamage += UpdateHealthbar;
-
-		bar = GameObject.Find("lifebarFill");
-		healthCounter = GameObject.Find("healthCounter").GetComponent<Text>();
-   
-		primaryCDGauge = GameObject.Find("primaryCDFill");
-		secondaryCDGauge = GameObject.Find("secondaryCDFill");
-
-		primaryCounter = GameObject.Find("primaryAmmoCounter").GetComponent<Text>();
-		secondaryCounter = GameObject.Find("secondaryAmmoCounter").GetComponent<Text>();
-
-		specialGauge = GameObject.Find("specialGauge").GetComponent<Image>();
-
 		Invoke ("Setup",0.1f);
     }
 
-	void Setup(){
-		UpdateHealthbar();
-		updateAmmo();
-	}
+
 
     void UpdateHealthbar()
     {
@@ -100,6 +72,36 @@ public class UIManager : MonoBehaviour {
 		secondaryCDGauge.transform.localScale = new Vector3(1-fill, secondaryCDGauge.transform.localScale.y, secondaryCDGauge.transform.localScale.z);
 		yield return null;
 		}
+	}
+
+	void Setup(){
+		playerObj = FindObjectOfType<ShipController>().gameObject;
+		wepCtrl = playerObj.GetComponent<WeaponManager>();
+
+		playerCtrl = playerObj.GetComponent<ShipController>();
+		playerCtrl.OnSpecial += UpdateSpecial;
+
+		wepCtrl.shotPrimary += primaryCR;
+		wepCtrl.shotSecondary += secondaryCR;
+		wepCtrl.primary.ammoChanged += updateAmmo;
+		wepCtrl.secondary.ammoChanged += updateAmmo;
+
+		playerHealth = playerObj.GetComponent<HealthManager>();
+		playerHealth.OnDamage += UpdateHealthbar;
+
+		bar = GameObject.Find("lifebarFill");
+		healthCounter = GameObject.Find("healthCounter").GetComponent<Text>();
+
+		primaryCDGauge = GameObject.Find("primaryCDFill");
+		secondaryCDGauge = GameObject.Find("secondaryCDFill");
+
+		primaryCounter = GameObject.Find("primaryAmmoCounter").GetComponent<Text>();
+		secondaryCounter = GameObject.Find("secondaryAmmoCounter").GetComponent<Text>();
+
+		specialGauge = GameObject.Find("specialGauge").GetComponent<Image>();
+
+		UpdateHealthbar();
+		updateAmmo();
 	}
 
 }

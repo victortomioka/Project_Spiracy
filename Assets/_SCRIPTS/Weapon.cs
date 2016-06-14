@@ -49,6 +49,8 @@ public class Weapon : MonoBehaviour {
 	public AudioClip muzzleSound;
 	public Animator anim;
 
+	public event System.Action ammoChanged;
+
 	void Awake(){
 		switch(ammoType){
 		case ammo.bullet:maxAmmo = 999;currAmmoIndex = 0;break;
@@ -65,6 +67,16 @@ public class Weapon : MonoBehaviour {
 
 	}
 
+	public void ammoChange(int quantity, bool reverse){
+		if(!Globals.cheatMode){
+			if(!reverse){currAmmo[currAmmoIndex]-=quantity;}
+			if(reverse){currAmmo[currAmmoIndex]+=quantity;}
+			if(ammoChanged!=null){
+			this.ammoChanged();
+			}
+		}
+	}
+
 	public void shoot(Weapon wep, Transform[] muz){
 		if (canShoot && cooldown <= 0 && currAmmo[currAmmoIndex]>=ammoConsumption) {
 			spreadIncrease = wep.spreadBase / 10;
@@ -72,9 +84,7 @@ public class Weapon : MonoBehaviour {
 			cooldown = wep.weaponCoolDown;
 			spreadFactor += spreadIncrease;
 
-			if(!Globals.cheatMode){
-				currAmmo[currAmmoIndex]-=ammoConsumption;
-			}
+			ammoChange(ammoConsumption, false);
 
 			if(!isStaggered){
 				for(int j = 0; j<muz.Length; j++){
