@@ -3,8 +3,8 @@ using System.Collections;
 
 public class MouseRotate : MonoBehaviour {
 
-	public float rotSpeed = 30;
-	public float accel = 1;
+	public float rotSpeed = 360;
+	public float accel = 90;
 
 	float currSpeed = 0;
 
@@ -21,18 +21,19 @@ public class MouseRotate : MonoBehaviour {
 	}
 
 	void OnMouseDrag(){
+
 		rotAnim.enabled=false;
 		StopAllCoroutines();
 		if(currSpeed<rotSpeed){
 			currSpeed+=accel;
 		}
 		rotX = Input.GetAxis("Mouse X")*currSpeed*Mathf.Deg2Rad;
-		rotY = Input.GetAxis("Mouse Y")*currSpeed*Mathf.Deg2Rad;
+		rotY = Input.GetAxis("Mouse Y")*currSpeed*Mathf.Deg2Rad*(-1);
 		lastMouseX = Input.GetAxis("Mouse X");
 		lastMouseY = Input.GetAxis("Mouse Y");
 
-		transform.RotateAround(Vector3.up,-rotX);
-		transform.RotateAround(Vector3.right,-rotY);
+		transform.Rotate(Vector3.up,-rotX);
+		transform.Rotate(Vector3.right,-rotY);
 	}
 
 	void OnMouseUp(){
@@ -48,10 +49,10 @@ public class MouseRotate : MonoBehaviour {
 			currSpeed=Mathf.SmoothStep(momentum,0,counter);
 
 			rotX = lastMouseX*currSpeed*Mathf.Deg2Rad;
-			rotY = lastMouseY*currSpeed*Mathf.Deg2Rad;
+			rotY = lastMouseY*currSpeed*Mathf.Deg2Rad*(-1);
 
-			transform.RotateAround(Vector3.up,-rotX);
-			transform.RotateAround(Vector3.right,-rotY);
+			transform.Rotate(Vector3.up,-rotX);
+			transform.Rotate(Vector3.right,-rotY);
 
 			yield return null;
 		}

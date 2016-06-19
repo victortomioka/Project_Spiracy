@@ -9,7 +9,6 @@ public class EquipMenu : MonoBehaviour {
 	public ShipController[] shipDb;
 	int shipIndex = 0;
 	public Weapon[] weaponDb;
-	int weaponIndex = 0;
 	Weapon primaryweapon;
 	Weapon secondaryweapon;
 	Scrollbar shipScroll,primaryScroll,secondaryScroll;
@@ -38,7 +37,6 @@ public class EquipMenu : MonoBehaviour {
 		if(weapon2Dummy!=null){
 			GameObject.Destroy(weapon2Dummy);
 		}
-
 		weapon1Dummy = Instantiate(weaponDb[valueToInt(primVal,weaponDb.Length)].gameObject,mount1.position,mount1.rotation) as GameObject;
 		weapon2Dummy = Instantiate(weaponDb[valueToInt(secVal,weaponDb.Length)].gameObject,mount2.position,mount2.rotation) as GameObject;
 
@@ -107,14 +105,15 @@ public class EquipMenu : MonoBehaviour {
 
 	void shipSetup () {
 		float shipVal = shipScroll.value;
-		GameObject dummy = Instantiate(shipDummy = shipDb[valueToInt(shipVal,shipDb.Length)].gameObject,shipPos.position,shipPos.rotation) as GameObject;
-		dummy.transform.parent = shipPos;
-		dummy.GetComponent<WeaponManager>().enabled = false;
-		dummy.GetComponent<ShipController>().enabled = false;
-		dummy.GetComponent<HealthManager>().enabled = false;
-		dummy.GetComponent<UIManager>().enabled = false;
-		dummy.transform.localScale*=0.5f;
-		dummy.AddComponent<MouseRotate>();
+		shipIndex = valueToInt(shipVal,shipDb.Length);
+		shipDummy = Instantiate(shipDb[shipIndex].gameObject,shipPos.position,shipPos.rotation) as GameObject;
+		shipDummy.transform.parent = shipPos;
+		shipDummy.GetComponent<WeaponManager>().enabled = false;
+		shipDummy.GetComponent<ShipController>().enabled = false;
+		shipDummy.GetComponent<HealthManager>().enabled = false;
+		shipDummy.GetComponent<UIManager>().enabled = false;
+		shipDummy.transform.localScale*=0.5f;
+		shipDummy.AddComponent<MouseRotate>();
 		mount1 = GameObject.Find("weaponMount1").transform;
 		mount2 = GameObject.Find("weaponMount2").transform;
 

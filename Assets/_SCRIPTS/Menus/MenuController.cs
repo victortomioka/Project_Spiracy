@@ -23,8 +23,6 @@ public class MenuController : MonoBehaviour {
 	List<Text> creditScreen = new List<Text>();
 	List<Text> quitScreen = new List<Text>();
 	private bool canPressAny = false;
-	private bool mainMenuOn = false;
-	Camera mainCam;
 	Color fadeStart = Color.clear;
 
 	#endregion
@@ -261,7 +259,6 @@ public class MenuController : MonoBehaviour {
 		creditsTextImply = GameObject.Find("implying").GetComponent<Text>();
 		allUI.Add(creditsTextImply);
 		creditScreen.Add(creditsTextImply);
-		mainCam = Camera.main;
 		currentMenu = menus.pressany;
 
 		foreach(Text t in allUI){

@@ -8,16 +8,12 @@ public class Pickup : MonoBehaviour {
 	public enum Type { Health, Special, Ammo };
 	public Type thisType;
 	public LayerMask mask;
-	public float turnRate = 45f;
 	public float maxSpeed = 100f;
 	public float accel = 1f;
 
 	float speedM1;
 	float speedM2;
 	float speedMFinal;
-	float tRate1;
-	float tRate2;
-	float tRateFinal;
 	float speed;
 	Rigidbody rb;
 
@@ -30,9 +26,6 @@ public class Pickup : MonoBehaviour {
 		speedM1 = maxSpeed / 3;
 		speedM2 = maxSpeed;
 		speedMFinal = Random.Range (speedM1, speedM2); 
-		tRate1 = turnRate / 3;
-		tRate2 = turnRate;
-		tRateFinal = Random.Range (tRate1, tRate2);
 		rb = this.GetComponent<Rigidbody>();
 	}
 
@@ -90,13 +83,13 @@ void Chase (Transform t) {
 		int randomInt = Random.Range(0,2);
 		if (randomInt == 0){
 			Weapon wep = GameObject.FindObjectOfType<WeaponManager>().primary;
-			if(Weapon.currAmmo[wep.currAmmoIndex]<wep.maxAmmo){
-				wep.ammoChange(wep.maxAmmo/10, true);
+			if(wep.GetCurrAmmo(wep.CurrAmmoIndex)<wep.MaxAmmo){
+				wep.ammoChange(wep.MaxAmmo/10, true);
 		}
 		}else if (randomInt == 1){
 			Weapon wep = GameObject.FindObjectOfType<WeaponManager>().secondary;
-			if(Weapon.currAmmo[wep.currAmmoIndex]<wep.maxAmmo){
-				wep.ammoChange(wep.maxAmmo/10, true);
+			if(wep.GetCurrAmmo(wep.CurrAmmoIndex)<wep.MaxAmmo){
+				wep.ammoChange(wep.MaxAmmo/10, true);
 			}
 		}
 		GameObject.Destroy(this.gameObject);
